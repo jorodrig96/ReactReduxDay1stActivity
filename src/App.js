@@ -1,5 +1,5 @@
 import './App.css';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, connect } from 'react-redux'
 import { clearData, fetchData, incrementId, decrementId, inputId } from './features/dataSlice'
 import { useEffect } from 'react';
 
@@ -15,9 +15,9 @@ function App(props) {
     }
   }
 
-  useEffect(() => {
+useEffect(() => {
     dispatch(fetchData())
-  }, [props.objectId, dispatch])
+  }, [props.objectId, dispatch]) 
 
 
   return (
@@ -39,5 +39,9 @@ function App(props) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  objectId: state.data.objectId
+})
 
-export default App;
+
+export default connect(mapStateToProps)(App);
